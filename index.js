@@ -13,7 +13,7 @@ app.use(cors());
 
 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.t3cv0.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xylkmyu.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
@@ -26,34 +26,34 @@ const run = async () => {
 
 
 
-        // Post Orders
-        app.post('/orders', async (req, res) => {
-            const order = req.body;
-            const result = await ordersCollection.insertOne(order);
+        // Post Helps
+        app.post('/helps', async (req, res) => {
+            const help = req.body;
+            const result = await helpCollection.insertOne(help);
             res.send(result);
         })
 
-        // Get Orders
-        app.get('/orders', async (req, res) => {
+        // Get Helps
+        app.get('/helps', async (req, res) => {
             const query = {};
-            const orders = ordersCollection.find(query);
+            const orders = helpCollection.find(query);
             const result = await orders.toArray();
             res.send(result);
         })
 
-        // Delete Order
-        app.delete('/order/:id', async (req, res) => {
+        // Delete Help
+        app.delete('/helps/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const result = await ordersCollection.deleteOne(query);
+            const result = await helpCollection.deleteOne(query);
             res.send(result);
         })
 
-        // Get order by id
-        app.get('/order/:id', async (req, res) => {
+        // Get Help by id
+        app.get('/helps/:id', async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
-            const result = await ordersCollection.findOne(filter);
+            const result = await helpCollection.findOne(filter);
             res.send(result);
         })
 
