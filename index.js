@@ -27,7 +27,7 @@ const run = async () => {
 
 
         // Post Helps
-        app.post('/helps', async (req, res) => {
+        app.post('/help', async (req, res) => {
             const help = req.body;
             const result = await helpCollection.insertOne(help);
             res.send(result);
